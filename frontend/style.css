@@ -1,6 +1,8 @@
 :root {
   --main-height: 100vh;
   --main-width: 100vh;
+
+  --main-percent: 100%;
 }
 
 body {
@@ -82,6 +84,7 @@ div.first.most-inner::before {
 }
 
 div.first.most-inner::after {
+  position: absolute;
   content: "B";
 }
 
@@ -153,3 +156,25 @@ body > div > div > div > div > div > div > div > div > div > div {
   width: calc(var(--main-width) * 0.1);
   background: #dba29d;
 }
+
+.container {
+  position: relative;
+}
+
+.container div {
+  position: absolute;
+  top: calc(var(--main-percent) * 0.05);
+  left: calc(var(--main-percent) * 0.05);
+  right: calc(var(--main-percent) * 0.05);
+  bottom: calc(var(--main-percent) * 0.05);
+  margin: auto auto;
+  /* padding: 5% 5% 5% 5%; */
+}
+
+/* FLEX */
+/* 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
