@@ -168,7 +168,6 @@ body > div > div > div > div > div > div > div > div > div > div {
   right: calc(var(--main-percent) * 0.05);
   bottom: calc(var(--main-percent) * 0.05);
   margin: auto auto;
-  /* padding: 5% 5% 5% 5%; */
 }
 
 /* FLEX */
