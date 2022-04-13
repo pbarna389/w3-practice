@@ -84,6 +84,7 @@ div.first.most-inner::before {
 }
 
 div.first.most-inner::after {
+  display: inline-block;
   position: absolute;
   content: "B";
 }
@@ -159,20 +160,22 @@ body > div > div > div > div > div > div > div > div > div > div {
 
 .container {
   position: relative;
+  padding-right: 5%;
 }
 
 .container div {
   position: absolute;
-  top: calc(var(--main-percent) * 0.05);
-  left: calc(var(--main-percent) * 0.05);
-  right: calc(var(--main-percent) * 0.05);
-  bottom: calc(var(--main-percent) * 0.05);
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
   margin: auto auto;
 }
 
 /* FLEX */
 /* 
-body {
+.container,
+.container div {
   display: flex;
   justify-content: center;
   align-items: center;
