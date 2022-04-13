@@ -172,6 +172,33 @@ body > div > div > div > div > div > div > div > div > div > div {
   margin: auto auto;
 }
 
+/* h3 {
+  display: inline-block;
+} */
+
+#countries {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  width: 95%;
+}
+
+.countrycont {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  /* align-items: center; */
+  border: 1px solid black;
+}
+
+#countries div {
+  box-sizing: border-box;
+  padding: 5px;
+
+  min-width: 100px;
+  max-width: 150px;
+}
+
 /* FLEX */
 /* 
 .container,
