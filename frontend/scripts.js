@@ -10,8 +10,8 @@ async function loadEvent() {
     // document.querySelector('#countries').innerHTML += " ,hali";
     let countriesData = await fetch(`https://restcountries.com/v3.1/all`);
     let countriesJSON = await countriesData.json();
-    console.log(countriesData);
-    console.log(countriesJSON);
+    // console.log(countriesData);
+    // console.log(countriesJSON);
 
 
     let countriesSection = document.querySelector('#countries');
@@ -34,6 +34,10 @@ async function loadEvent() {
                     <h2>${countryName}</h2>
                 </div>`
     };
+
+
+    //ARRAY.MAP FOR CIKLUS HELYETT
+    // [...countriesJSON].map(country => countriesSection.insertAdjacentHTML('beforeend', countryComponent(country.name.common)));
 
     for (let i = 1; i < countriesJSON.length; i++) {
         // countriesSection.insertAdjacentHTML('beforeend', `${countriesJSON[i].name.common}`);
