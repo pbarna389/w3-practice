@@ -22,24 +22,26 @@ async function loadEvent() {
 
     const countryComponent = countryName => {
         return `<div class="country">
-                    <h2>Country: ${countryName}</h2>
+                    <h2>${countryName}</h2>
+                </div>`
+    };
+
+    const regionComponent = region => {
+        return `<div class="region">
+                    <h2>Continent: ${region}</h2>
                 </div>`
     };
 
     const capitalComponent = capitalName => {
-        // if (!capitalName) {
-        //     return `<div class="capital">
-        //                 <h3>Capital: None</h3>
-        //             </div>`
-        // };
         return `<div class="capital">
                     <h3>Capital: ${capitalName}</h3>
                 </div>`
     };
 
-    const flagComponent = flagPic => {
-        return `<div class="flagPic">
-                    <h4>Flag: ${flagPic}</h4>
+
+    const flagComponent = (flag) => {
+        return `<div class="flag">
+                    <h3>Flag: ${flag}</h3>
                 </div>`
     };
 
@@ -49,7 +51,7 @@ async function loadEvent() {
         };
 
         return `<div class="independence">
-                    <h3>Independent:</h3><input type ="checkbox" disabled ${ind(independence)}>
+                    <h1>Independent:</h1><input type ="checkbox" disabled ${ind(independence)}>
                 </div>`
     };
 
@@ -58,32 +60,42 @@ async function loadEvent() {
 
     for (let i = 0; i < countriesJSON.length; i++) {
         // countriesSection.insertAdjacentHTML('beforeend', `${ countriesJSON[i].name.common } `);
-        console.log(i)
         if (!countriesJSON[i].capital) {
             countriesSection.insertAdjacentHTML('beforeend',
-                `<div class="countrycont">
+                `<div class="countrycont ${i}">
                 ${countryComponent(countriesJSON[i].name.common)}
+                \n${regionComponent(countriesJSON[i].region)}
+                \n${capitalComponent("None")}
                 \n${independentComponent(countriesJSON[i].independent)}
                 \n${flagComponent(countriesJSON[i].flag)}
-             </div}`);
+             </div>}`)
+                ;
             // countriesSection.insertAdjacentHTML('beforeend', independentComponent(countriesJSON[i].independent));
             // countriesSection.insertAdjacentHTML('beforeend', flagComponent(countriesJSON[i].flag));
         } else {
             countriesSection.insertAdjacentHTML('beforeend',
-                `<div class="countrycont">
+                `<div class="countrycont ${i}">
                 ${countryComponent(countriesJSON[i].name.common)}
+                \n${regionComponent(countriesJSON[i].region)}
                 \n${capitalComponent(countriesJSON[i].capital[0])}
                 \n${independentComponent(countriesJSON[i].independent)}
                 \n${flagComponent(countriesJSON[i].flag)}
-            </div>`);
+                </div>`);
             // countriesSection.insertAdjacentHTML('beforeend', capitalComponent(countriesJSON[i].capital[0]));
             // countriesSection.insertAdjacentHTML('beforeend', independentComponent(countriesJSON[i].independent));
             // countriesSection.insertAdjacentHTML('beforeend', flagComponent(countriesJSON[i].flag));
+            console.log(Object.values(countriesJSON[i].flags)[0])
         };
     };
 
+    for (let i = 0; i < countriesJSON.length; i++) {
+        let divs = [...document.querySelectorAll(".countrycont")];
+        divs.map((x, index) => index === i && x.setAttribute("style", "background-image: url(" + `${Object.values(countriesJSON[i].flags)[1]}` + ");background-repeat: no-repeat;background-size: cover; "));
+    };
+
     // console.log([...countriesJSON])
-    // countriesSection.insertAdjacentHTML('afterend', JSON.stringify(countriesJSON[0].name.nativeName.spa.official));
+
+    // countriesJSON.map((x, i) => i === 0 && console.log(x));
 };
 
 window.addEventListener('load', loadEvent);

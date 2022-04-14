@@ -179,8 +179,10 @@ body > div > div > div > div > div > div > div > div > div > div {
 #countries {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
   gap: 10px;
-  width: 95%;
+
+  width: 100%;
 }
 
 .countrycont {
@@ -195,8 +197,7 @@ body > div > div > div > div > div > div > div > div > div > div {
   box-sizing: border-box;
   padding: 5px;
 
-  min-width: 100px;
-  max-width: 150px;
+  width: 200px;
 }
 
 /* FLEX */
