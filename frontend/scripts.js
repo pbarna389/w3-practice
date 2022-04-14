@@ -45,6 +45,7 @@ async function loadEvent() {
     };
 
     // countriesSection.insertAdjacentHTML('afterend', JSON.stringify(countriesJSON[0].name.nativeName.spa.official));
+    console.log(countriesJSON);
 };
 
 window.addEventListener('load', loadEvent);
