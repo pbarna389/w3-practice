@@ -39,6 +39,20 @@ header {
   object-fit: cover;
 }
 
+.background {
+  padding: 40px;
+  background-image: url("https://codecool.com/wp-content/uploads/2021/09/Home-Header.jpg");
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  background-position: center;
+  background-clip: padding-box;
+  background-attachment: fixed;
+}
+
+.gradient {
+  background-image: linear-gradient(red, blue);
+}
+
 #logo,
 header nav {
   display: inline-block;
