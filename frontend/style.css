@@ -29,6 +29,16 @@ header {
   z-index: 9999;
 }
 
+.image-container {
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
 #logo,
 header nav {
   display: inline-block;
