@@ -1,20 +1,10 @@
 console.log('This is a script file');
 
 async function loadEvent() {
-    // const menu = document.querySelector(".menu");
-    // menu.addEventListener('click', () => {
-    //     menu.textContent = 'I have been changed'
-    // });
-    // console.dir(document.querySelector('#countries'));
-
-    // document.querySelector('#countries').innerHTML += " ,hali";
     let countriesData = await fetch(`https://restcountries.com/v3.1/all`);
     let countriesJSON = await countriesData.json();
-    // console.log(countriesData);
-    console.log(countriesJSON);
-
-
     let countriesSection = document.querySelector('#countries');
+    console.log(countriesJSON);
 
     countriesSection.insertAdjacentHTML('beforebegin', `
     <h1>Countries: </h1>
@@ -44,7 +34,7 @@ async function loadEvent() {
     const flagComponent = (flag) => {
         return `<div class="flag">
                     <h3>Flag: ${flag}</h3>
-                </div>`
+                    </div>`
     };
 
     const independentComponent = independence => {
@@ -54,11 +44,29 @@ async function loadEvent() {
 
         return `<div class="independence">
                     <h1>Independent:</h1><input type ="checkbox" disabled ${ind(independence)}>
+                    </div>`
+    };
+
+    const officialNameComponent = spokenLang => {
+
+        return `<div class="language">
+                <h3>Official name: ${spokenLang}</h3>
                 </div>`
     };
 
+
+    //ITERÁLÁS OBJEKTUMBAN (FOR CIKLUS ÉS .MAP)
+
+    // for (let i = 0; i < countriesJSON.length; i++) {
+    //     if (i === 25) continue;
+    //     for (let x = 0, temp = Object.values(countriesJSON[i].name.nativeName); x < temp.length; x++) {
+    //         console.log(Object.keys(countriesJSON[i].name.nativeName)[x], temp[x].official, i);
+    //     };
+    // };
+
+    countriesJSON.map((country, index) => index === 25 ? index++ : Object.values(country.name.nativeName).map(x => console.log(Object.keys(x), x.official, index)));
+
     //ARRAY.MAP FOR CIKLUS HELYETT
-    // [...countriesJSON].map(country => countriesSection.insertAdjacentHTML('beforeend', countryComponent(country.name.common)));
 
     countriesJSON.map(countries => !countries.capital ? countriesSection.insertAdjacentHTML('beforeend',
         `<div class="countrycont">
@@ -67,7 +75,7 @@ async function loadEvent() {
             \n${capitalComponent("None")}
             \n${independentComponent(countries.independent)}
             \n${flagComponent(countries.flag)}
-        </div>}`)
+        </div>`)
         : countriesSection.insertAdjacentHTML('beforeend',
             `<div class="countrycont">
             ${countryComponent(countries.name.common)}
@@ -77,45 +85,17 @@ async function loadEvent() {
             \n${flagComponent(countries.flag)}
         </div>`));
 
-    //     // for (let i = 0; i < countriesJSON.length; i++) {
-    //     //     // countriesSection.insertAdjacentHTML('beforeend', `${ countriesJSON[i].name.common } `);
-    //     //     if (!countriesJSON[i].capital) {
-    //     //         countriesSection.insertAdjacentHTML('beforeend',
-    //     //             `<div class="countrycont ${i}">
-    //     //             ${countryComponent(countriesJSON[i].name.common)}
-    //     //             \n${regionComponent(countriesJSON[i].region)}
-    //     //             \n${capitalComponent("None")}
-    //     //             \n${independentComponent(countriesJSON[i].independent)}
-    //     //             \n${flagComponent(countriesJSON[i].flag)}
-    //     //          </div>}`)
-    //     //             ;
-    //     //         // countriesSection.insertAdjacentHTML('beforeend', independentComponent(countriesJSON[i].independent));
-    //     //         // countriesSection.insertAdjacentHTML('beforeend', flagComponent(countriesJSON[i].flag));
-    //     //     } else {
-    //     //         countriesSection.insertAdjacentHTML('beforeend',
-    //     //             `<div class="countrycont ${i}">
-    //     //             ${countryComponent(countriesJSON[i].name.common)}
-    //     //             \n${regionComponent(countriesJSON[i].region)}
-    //     //             \n${capitalComponent(countriesJSON[i].capital[0])}
-    //     //             \n${independentComponent(countriesJSON[i].independent)}
-    //     //             \n${flagComponent(countriesJSON[i].flag)}
-    //     //             </div>`);
-    //     // countriesSection.insertAdjacentHTML('beforeend', capitalComponent(countriesJSON[i].capital[0]));
-    //     // countriesSection.insertAdjacentHTML('beforeend', independentComponent(countriesJSON[i].independent));
-    //     // countriesSection.insertAdjacentHTML('beforeend', flagComponent(countriesJSON[i].flag));
-    //     console.log(Object.values(countriesJSON[i].flags)[0])
-    // };
+    // FLAGEK HÁTTÉRNEK FOR CIKLUS HELYETT .MAP+FUNCTION-NEL + BUTTONS = ADD, REMOVE
 
     const flagAddButton = document.querySelector('.flag-add');
     const flagRemoverButton = document.querySelector('.flag-remove');
+    const divs = [...document.querySelectorAll(".countrycont")];
 
     const flagInsert = (country, countryInd) => {
-        let divs = [...document.querySelectorAll(".countrycont")];
         divs.map((element, index) => index === countryInd && element.setAttribute("style", "background-image: url(" + `${Object.values(country.flags)[1]}` + ");background-repeat: no-repeat;background-size: cover; "));
     };
 
     const flagRemove = (country, countryInd) => {
-        let divs = [...document.querySelectorAll(".countrycont")];
         divs.map((element, index) => index === countryInd && element.setAttribute("style", "background-image:none;background-repeat: no-repeat;background-size: cover; "));
     };
 
@@ -125,25 +105,6 @@ async function loadEvent() {
     flagAddButton.addEventListener('click', flagAdder);
     flagRemoverButton.addEventListener('click', flagRemover);
 
-    // for (let i = 0; i < countriesJSON.length; i++) {
-    //     let divs = [...document.querySelectorAll(".countrycont")];
-    //     divs.map((x, index) => index === i && x.setAttribute("style", "background-image: url(" + `${Object.values(countriesJSON[i].flags)[1]}` + ");background-repeat: no-repeat;background-size: cover; "));
-    // };
-
-    // console.log([...countriesJSON])
-
-    // countriesJSON.map((x, i) => i === 0 && console.log(x));
 };
 
 window.addEventListener('load', loadEvent);
-
-// const logger = logThis => {
-//     console.log(logThis);
-// };
-
-// logger(`Sup`);
-// logger('Say hello to my little friend');
-// logger('Are you talking to me');
-// logger(4);
-// logger(4 || null);
-// logger(4 && null);
