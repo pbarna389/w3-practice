@@ -64,6 +64,8 @@ async function loadEvent() {
     //     };
     // };
 
+    //INDEX === 25 = ANTARCTICA, NINCS NATIVENAME-JE
+
     countriesJSON.map((country, index) => index === 25 ? index++ : Object.values(country.name.nativeName).map(x => console.log(Object.keys(x), x.official, index)));
 
     //ARRAY.MAP FOR CIKLUS HELYETT
@@ -92,11 +94,11 @@ async function loadEvent() {
     const divs = [...document.querySelectorAll(".countrycont")];
 
     const flagInsert = (country, countryInd) => {
-        divs.map((element, index) => index === countryInd && element.setAttribute("style", "background-image: url(" + `${Object.values(country.flags)[1]}` + ");background-repeat: no-repeat;background-size: cover; "));
+        divs.map((element, index) => index === countryInd && element.setAttribute("style", "background-image: url(" + `${Object.values(country.flags)[1]}` + ");background-repeat: no-repeat;background-size: cover;"));
     };
 
     const flagRemove = (country, countryInd) => {
-        divs.map((element, index) => index === countryInd && element.setAttribute("style", "background-image:none;background-repeat: no-repeat;background-size: cover; "));
+        divs.map((element, index) => index === countryInd && element.setAttribute("style", "background-image:none;background-repeat: no-repeat;background-size: cover;"));
     };
 
     const flagAdder = () => countriesJSON.map((country, index) => flagInsert(country, index));
